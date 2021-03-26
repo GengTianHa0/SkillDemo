@@ -3,11 +3,15 @@ package com.hao.babytun;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
-@MapperScan("com.hao.babytun")
-public class BabytunApplication {
 
+//mybatis在springboot启动的时候自动扫描mybatis实现的接口
+@MapperScan("com.hao.babytun")
+//利用注解来对缓存进行处理
+@EnableCaching
+public class BabytunApplication {
     public static void main(String[] args) {
         SpringApplication.run(BabytunApplication.class, args);
     }

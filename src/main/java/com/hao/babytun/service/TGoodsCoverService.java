@@ -20,7 +20,7 @@ public class TGoodsCoverService {
     TGoodsCoverMapper tGoodsCoverMapper;
 
     //如果没有访问数据库，放到缓存，如果有就取缓存中数据不访问数据库
-//    @Cacheable(value = "covers", key = "#goodsId") //key： covers::1 covers::2
+    @Cacheable(value = "covers", key = "#goodsId") //key： covers::1 covers::2
     public List<TGoodsCover> findCoversByGoodsId(long goodsId) {
         return tGoodsCoverMapper.findCoverByGoodsId(goodsId);
     }

@@ -22,6 +22,9 @@ public class TGoodsService{
 
     //如果没有访问数据库，放到缓存，如果有就取缓存中数据不访问数据库
 //    @Cacheable(value = "goods", key = "#goodsId") //key： goods::1 goods::2
+
+    //第一次访问的时候将访问结果放入缓存 第二次访问时不再执行方法内部的代码 而是从缓存中直接提取数据
+    @Cacheable(value = "goods",key = "#goodsId") //goods::1 goods::2
     public TGoods getGoods(Long goodsId) {
         return tGoodsMapper.findById(goodsId);
     }

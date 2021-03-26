@@ -20,7 +20,7 @@ public class TGoodsParamService {
     TGoodsParamMapper tGoodsParamMapper;
 
     //如果没有访问数据库，放到缓存，如果有就取缓存中数据不访问数据库
-//    @Cacheable(value = "params", key = "#goodsId") //key： params::1 params::2
+    @Cacheable(value = "params", key = "#goodsId") //key： params::1 params::2
     public List<TGoodsParam> findParamByGoodsId(long goodsId) {
         return tGoodsParamMapper.findParamByGoodsId(goodsId);
     }

@@ -20,7 +20,7 @@ public class TGoodsDetailService  {
     TGoodsDetailMapper tGoodsDetailMapper;
 
     //如果没有访问数据库，放到缓存，如果有就取缓存中数据不访问数据库
-//    @Cacheable(value = "details", key = "#goodsId") //key： details::1 details::2
+    @Cacheable(value = "details", key = "#goodsId") //key： details::1 details::2
     public List<TGoodsDetail> findDetailByGoodsId(long goodsId) {
         return tGoodsDetailMapper.findDetailByGoodsId(goodsId);
     }

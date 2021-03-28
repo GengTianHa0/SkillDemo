@@ -111,10 +111,10 @@
                         </colgroup>
                         <tbody>
                         <#list params as p >
-                        <tr>
-                            <td>${p.gpParamName}</td>
-                            <td>${p.gpParamValue}</td>
-                        </tr>
+                            <tr>
+                                <td>${p.gpParamName}</td>
+                                <td>${p.gpParamValue}</td>
+                            </tr>
                         </#list>
                         </tbody>
                     </table>
@@ -130,13 +130,13 @@
     //由于模块都一次性加载，因此不用执行 static.use() 来加载对应模块，直接使用即可：
     ;!function () {
         var layer = layui.layer
-                , form = layui.form;
+            , form = layui.form;
         var $ = layui.$;
-        $.getJSON("/evaluates/${goods.goodsId?string('0')}", function (data) {
+        $.getJSON("/evaluate/${goods.goodsId?string('0')}", function (data) {
             for (var i = 0; i < data.length; i++){
                 $("#evaluates").append("<h2>"+data[i].createTime+"  "+data[i].content)
             }
-         });
+        });
     }();
 </script>
 <script>

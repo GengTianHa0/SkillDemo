@@ -2,10 +2,7 @@ package com.hao.babytun.scheduler;
 
 
 import com.hao.babytun.entity.*;
-import com.hao.babytun.service.TGoodsCoverService;
-import com.hao.babytun.service.TGoodsDetailService;
-import com.hao.babytun.service.TGoodsParamService;
-import com.hao.babytun.service.TGoodsService;
+import com.hao.babytun.service.*;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -45,8 +42,8 @@ public class StaticTask {
     private TGoodsDetailService tGoodsDetailService;
     @Resource
     private TGoodsParamService tGoodsParamService;
-//    @Resource
-//    private TPromotionSeckillService tPromotionSeckillService;
+    @Resource
+    private TPromotionSeckillService tPromotionSeckillService;
     //freemarker的核心配置类，用于动态生成模板对象
     //在springboot ioc容器初始化的时候，自动将Configuration初始化了
     @Resource
@@ -85,31 +82,31 @@ public class StaticTask {
         }
     }
 
-//    @Scheduled(cron = "0/5 * * * * ?")
-//    public void startSeckill() {
-//        List<TPromotionSeckill> tPromotionSeckills = tPromotionSeckillService.findPromotionByStatus0();
-//        for (TPromotionSeckill tp : tPromotionSeckills) {
-//            redis.delete("seckill:count:" + tp.getPsId());
-//            TPromotionSeckill t = new TPromotionSeckill();
-//            for (int i = 0; i < tp.getPsCount(); i++) {
-//                redis.opsForList().rightPush("seckill:count:" + tp.getPsId(), tp.getGoodsId());
-//            }
-//            t.setStatus(1);
-//            t.setPsId(tp.getPsId());
-//            tPromotionSeckillService.updateByPrimaryKeySelective(t);
-//            System.out.println(tp.getGoodsId() + "活动开始");
-//        }
-//    }
-//    @Scheduled(cron = "0/5 * * * * ?")
-//    public void endSeckill(){
-//        List<TPromotionSeckill> tPromotionSeckills = tPromotionSeckillService.findByEndTime();
-//        for (TPromotionSeckill tp : tPromotionSeckills) {
-//            redis.delete("seckill:count:" + tp.getPsId());
-//            TPromotionSeckill t = new TPromotionSeckill();
-//            t.setStatus(2);
-//            t.setPsId(tp.getPsId());
-//            tPromotionSeckillService.updateByPrimaryKeySelective(t);
-//            System.out.println(tp.getGoodsId() + "活动结束");
-//        }
-//    }
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void startSeckill() {
+        List<TPromotionSeckill> tPromotionSeckills = tPromotionSeckillService.findPromotionByStatus0();
+        for (TPromotionSeckill tp : tPromotionSeckills) {
+            redis.delete("seckill:count:" + tp.getPsId());
+            TPromotionSeckill t = new TPromotionSeckill();
+            for (int i = 0; i < tp.getPsCount(); i++) {
+                redis.opsForList().rightPush("seckill:count:" + tp.getPsId(), tp.getGoodsId());
+    }
+            t.setStatus(1);
+            t.setPsId(tp.getPsId());
+            tPromotionSeckillService.updateByPrimaryKeySelective(t);
+            System.out.println(tp.getGoodsId() + "活动开始");
+}
+    }
+    @Scheduled(cron = "0/5 * * * * ?")
+    public void endSeckill(){
+        List<TPromotionSeckill> tPromotionSeckills = tPromotionSeckillService.findByEndTime();
+        for (TPromotionSeckill tp : tPromotionSeckills) {
+            redis.delete("seckill:count:" + tp.getPsId());
+            TPromotionSeckill t = new TPromotionSeckill();
+            t.setStatus(2);
+            t.setPsId(tp.getPsId());
+            tPromotionSeckillService.updateByPrimaryKeySelective(t);
+            System.out.println(tp.getGoodsId() + "活动结束");
+        }
+    }
 }

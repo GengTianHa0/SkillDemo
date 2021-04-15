@@ -14,7 +14,6 @@ spring:
     date-format: yyyy-MM-dd
     time-zone: GMT+8
   redis:
-    database: 3
     host: 127.0.0.1
     port: 6379
     jedis:
@@ -23,6 +22,21 @@ spring:
         max-idle: 100
         min-idle: 10
         max-wait: 10000ms
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+    listener:
+      #定义消费者最多同时处理10个消息
+      simple:
+        prefetch: 10
+        #消息手动确认
+        acknowledge-mode: manual
+
 
 mybatis:
   mapper-locations: classpath:/mapper/*.xml

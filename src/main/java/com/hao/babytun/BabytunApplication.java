@@ -24,6 +24,9 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession //RedisSession
 public class BabytunApplication {
     //修改redisTemplate持久化方式
+
+
+
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();

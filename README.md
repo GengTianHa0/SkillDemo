@@ -1,3 +1,3 @@
 # babytun
 
-springboot+mysql+mybatis+Tomcat
+springboot++mysql+nginx+redis+redssion+rabbitmq
